@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[996],{4398:e=>{e.exports=JSON.parse('{"title":"Frontend","description":"5 minutes to learn the most important Docusaurus concepts.","slug":"/category/frontend","permalink":"/docs/category/frontend","navigation":{"next":{"title":"Markdown Features","permalink":"/docs/Frontend/markdown-features"}}}')}}]);
