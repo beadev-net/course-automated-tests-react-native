@@ -1,33 +1,9 @@
-### Login
-POST http://localhost:7878/api/login HTTP/1.1
-content-type: application/json
-
-{
-    "email": "Admin",
-    "password": "admin"
-}
-
 ### Healthcheck
 
-GET http://localhost:7878/healthcheck HTTP/1.1
+GET http://localhost:8080/healthcheck HTTP/1.1
 content-type: application/json
 
-
-### FakeNews
-
-GET http://localhost:7878/api/fakenews HTTP/1.1
-content-type: application/json
-
-### Users Profile
-
-PUT http://localhost:7878/api/users?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkFkbWluIiwiaWF0IjoxNjk1ODU0NzE4LCJleHAiOjE2OTU4NTgzMTh9.U-YaJiMbTqwqfk6Uv0BvBZGRgHAlv_OSaJ0U-o5l7iQ HTTP/1.1
-content-type: application/json
-
-{
-    "name": "Admin",
-    "email": "Admin",
-    "birthday": "2020-01-01"
-}
+#########
 
 ### Register
 POST http://localhost:8080/api/register HTTP/1.1
@@ -37,5 +13,38 @@ content-type: application/json
     "email": "Admin",
     "password": "admin",
     "name": "Admin",
+    "birthday": "2020-01-01"
+}
+
+#########
+
+### Login
+POST http://localhost:8080/api/login HTTP/1.1
+content-type: application/json
+
+{
+    "email": "Admin",
+    "password": "admin"
+}
+
+#########
+
+### FakeNews
+
+GET http://localhost:8080/api/fakenews
+    ?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkFkbWluIiwiaWF0IjoxNjk2Mzc3NDM0LCJleHAiOjE2OTYzODEwMzR9.-c5ZcgAYSUdWqvfHUOkClRMyOae4vO2YSFE3gBoZyW0
+content-type: application/json
+
+#########
+
+### Users Update Profile
+
+PUT http://localhost:8080/api/users
+    ?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkFkbWluIiwiaWF0IjoxNjk2MzY5MzU0LCJleHAiOjE2OTYzNzI5NTR9.oaxLrsfxjeiQQOncSjoZLth_gla8qkcbSZtKfbaZrb4
+content-type: application/json
+
+{
+    "name": "Admin",
+    "email": "Admin",
     "birthday": "2020-01-01"
 }

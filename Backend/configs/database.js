@@ -1,6 +1,7 @@
 const { MongoClient, ServerApiVersion } = require("mongodb");
 
-const uri = "mongodb://root:root@mongodb:27017/";
+const uri = "mongodb://root:root@localhost:27017/";
+const database_name = "fakedb";
 
 const client = new MongoClient(uri, {
   serverApi: {
@@ -10,22 +11,30 @@ const client = new MongoClient(uri, {
   },
 });
 
-async function run(callback) {
+async function connect() {
   try {
     await client.connect();
-    await client.db("fakedb").command({ ping: 1 });
+    await client.db(database_name).command({ ping: 1 });
 
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!",
     );
-  } finally {
+
+    return client;
+  } catch (err) {
+    console.log(err.stack);
+  }
+}
+
+async function run(callback) {
+  try {
     if (typeof callback === "function") {
       console.log(" > Running Callback");
       return callback(client);
     }
-    // Ensures that the client will close when you finish/error
-    await client.close();
+  } catch (err) {
+    console.log(err.stack);
   }
 }
 
-module.exports = { run };
+module.exports = { connect, run, database_name, client };
