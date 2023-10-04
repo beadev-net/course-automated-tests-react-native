@@ -1,9 +1,13 @@
 const database = require("../configs/database");
+const collection = "users";
 
 class UsersRepository {
   async getUserByEmail(email) {
     return database.run(async (client) => {
-      return client.db("fakedb").collection("users").findOne({ email: email });
+      return client
+        .db(database.database_name)
+        .collection(collection)
+        .findOne({ email: email });
     });
   }
 
@@ -12,8 +16,8 @@ class UsersRepository {
 
     return database.run(async (client) => {
       return client
-        .db("fakedb")
-        .collection("users")
+        .db(database.database_name)
+        .collection(collection)
         .updateOne(filter, {
           $set: {
             name: name,
@@ -24,9 +28,11 @@ class UsersRepository {
   }
 
   async save(user) {
-    console.log("Saving user: ", user);
     return database.run(async (client) => {
-      return client.db("fakedb").collection("users").insertOne(user);
+      return client
+        .db(database.database_name)
+        .collection(collection)
+        .insertOne(user);
     });
   }
 }

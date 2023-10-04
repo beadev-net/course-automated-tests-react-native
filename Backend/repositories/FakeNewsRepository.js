@@ -1,13 +1,13 @@
 const database = require("../configs/database");
 
 class FakeNewsRepository {
-  async getAllFakeNews() {
+  async getAllFakeNews(limit = 20) {
     return database.run(async (client) => {
       return client
-        .db("fakedb")
+        .db(database.database_name)
         .collection("fakenews")
         .find()
-        .limit(5)
+        .limit(limit)
         .toArray((err, doc) => {
           return doc;
         });

@@ -7,7 +7,6 @@ class FakeNewsListAllUseCase {
 
   async execute() {
     const getAll = await this.repository.getAllFakeNews();
-    console.log(getAll);
     return getAll;
   }
 }
