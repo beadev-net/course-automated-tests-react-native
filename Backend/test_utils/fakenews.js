@@ -59,7 +59,16 @@ const insertFakeNewsListFake = async (fakeNewsList = null, quantity = 20) => {
   const record = fakeNewsList ?? generateFakeNewsListStub(quantity);
 
   const client = await connect();
-  await client.db(database_name).collection(collection).insertMany(record);
+  await client
+    .db(database_name)
+    .collection(collection)
+    .insertMany(record, {
+      writeConcern: {
+        w: "majority",
+        j: true,
+        wtimeout: 1000,
+      },
+    });
 
   return record;
 };

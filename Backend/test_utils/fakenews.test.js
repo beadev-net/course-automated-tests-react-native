@@ -1,5 +1,8 @@
 const generateFakeNewsList = require("./fakenews");
 
+const mockDB = jest.mock("../configs/database");
+mockDB.connect = jest.fn().mockResolvedValue({});
+
 test(`
     Given a scenario that generates fakenews list with 10 items
     When execute generateFakeNewsList

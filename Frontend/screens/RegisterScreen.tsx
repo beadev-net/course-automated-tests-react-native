@@ -10,28 +10,23 @@ import {
 } from 'react-native';
 import {useForm} from 'react-hook-form';
 import Input from '../components/Input';
-import {useRoute} from '@react-navigation/native';
 import colors from '../theme/colors';
 import {Button} from '../components/Button';
 import {useNavigation} from '@react-navigation/native';
-
-type ParamList = {
-  Profile: {
-    token: string;
-  };
-};
+import {register as registerAPI} from '../api/register';
 
 const RegisterScreen = () => {
-  const {params} = useRoute();
   const navigation = useNavigation();
-  const {register, control, handleSubmit} = useForm();
+  const {register, control, handleSubmit, reset} = useForm();
 
   const onSubmit = async (payload: any) => {
-    try {
-      // await profile(token, payload);
-      Alert.alert('Sucesso!', 'Perfil atualizado');
-    } catch (error) {
-      Alert.alert('Erro', 'Erro ao atualizar perfil');
+    const response = await registerAPI(payload);
+
+    Alert.alert(response.data?.message ?? 'Erro ao realizar o cadastro.');
+
+    if (response.status === 201) {
+      navigation.navigate('Login');
+      reset();
     }
   };
 

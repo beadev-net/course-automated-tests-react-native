@@ -1,6 +1,13 @@
 const { MongoClient, ServerApiVersion } = require("mongodb");
 
-const uri = "mongodb://root:root@localhost:27017/";
+const uri = process.env.DATABASE_URL || null;
+console.log(uri);
+if (!uri) {
+  throw new Error(
+    "Please define the DATABASE_URL environment variable inside .env",
+  );
+}
+
 const database_name = "fakedb";
 
 const client = new MongoClient(uri, {
@@ -13,7 +20,9 @@ const client = new MongoClient(uri, {
 
 async function connect() {
   try {
-    await client.connect();
+    await client.connect({
+      useUnifiedTopology: true,
+    });
     await client.db(database_name).command({ ping: 1 });
 
     console.log(

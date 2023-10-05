@@ -12,7 +12,11 @@ class RegisterUseCase {
       throw new UserAlreadyExistException();
     }
 
-    return this.userRepository.save(user);
+    await this.userRepository.save(user);
+
+    return {
+      message: "User created successfully",
+    };
   }
 }
 

@@ -1,8 +1,22 @@
+const JWTService = require("../services/JWTService");
 const { insertUserFake, deleteUserFake } = require("../test_utils/user");
 
-const loginAuthFake = async (request) => {
+const loginAuthFake = async () => {
   const user = await insertUserFake();
 
+  const token = new JWTService().sign(user);
+
+  return {
+    user: user,
+    token: token,
+    callbackUserDelete: async (user) => {
+      console.log("deleted user: ", user);
+      await deleteUserFake(user);
+    },
+  };
+};
+
+const loginAuth = async (request, user) => {
   const login = await request
     .post("/api/login")
     .send(user)
@@ -17,4 +31,4 @@ const loginAuthFake = async (request) => {
   };
 };
 
-module.exports = { loginAuthFake };
+module.exports = { loginAuthFake, loginAuth };

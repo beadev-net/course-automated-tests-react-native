@@ -1,7 +1,7 @@
 const database = require("../configs/database");
 
 class FakeNewsRepository {
-  async getAllFakeNews(limit = 20) {
+  async getAllFakeNews(limit = 50) {
     return database.run(async (client) => {
       return client
         .db(database.database_name)

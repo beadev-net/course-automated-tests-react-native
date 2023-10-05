@@ -7,6 +7,10 @@ class JWTService {
   sign(payload) {
     return jwt.sign(payload, sign_token, { expiresIn });
   }
+
+  decode(token) {
+    return jwt.decode(token);
+  }
 }
 
 module.exports = JWTService;

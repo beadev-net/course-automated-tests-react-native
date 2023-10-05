@@ -15,6 +15,7 @@ import {storeData, getData, updateData} from '../hooks/db';
 import Input from '../components/Input';
 import BottomTab from '../components/BottomTab';
 import About from '../components/About';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type ParamList = {
   Home: {
@@ -45,14 +46,12 @@ const HomeScreen = () => {
     const getFakeNews = async () => {
       const cacheData = await getData('fakenews_list');
 
-      if (!cacheData) {
+      if (!cacheData || cacheData.length == 0) {
         const res = await fakenews(params.token);
-
-        await storeData('fakenews_list', res);
-        setListFakeNews(res);
+        await storeData('fakenews_list', res.data ?? []);
+        setListFakeNews(res.data ?? []);
         return;
       }
-      console.log(cacheData);
       setListFakeNews(cacheData);
     };
 

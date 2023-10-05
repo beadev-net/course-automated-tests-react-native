@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import {useForm} from 'react-hook-form';
 import Input from '../components/Input';
-import {profile} from '../api/profile';
+import {updateProfile, getProfile} from '../api/profile';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import jwt_decode from 'jwt-decode';
 import colors from '../theme/colors';
@@ -28,13 +28,13 @@ const ProfileScreen = () => {
 
   const {register, control, handleSubmit} = useForm({
     defaultValues: async () => {
-      const fields = jwt_decode(params.token) as any;
+      const {user} = await getProfile(params.token);
 
       return {
-        name: fields?.name,
-        email: fields?.email,
-        password: fields?.password,
-        birthday: fields?.birthday,
+        name: user?.name,
+        email: user?.email,
+        password: user?.password,
+        birthday: user?.birthday,
       };
     },
   });
@@ -43,7 +43,7 @@ const ProfileScreen = () => {
     const {token} = params;
 
     try {
-      await profile(token, payload);
+      await updateProfile(token, payload);
       // Alert.alert('Sucesso!', 'Perfil atualizado');
     } catch (error) {
       // Alert.alert('Erro', 'Erro ao atualizar perfil');

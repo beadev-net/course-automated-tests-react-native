@@ -9,9 +9,16 @@ class RegisterController {
       const userRepository = new UsersRepository();
       const useCase = new RegisterUseCase({ userRepository });
 
-      res
-        .status(201)
-        .send(await useCase.execute({ name, email, password, birthday }));
+      console.log(`User: ${email}, registered with successfully`);
+
+      const response = await useCase.execute({
+        name,
+        email,
+        password,
+        birthday,
+      });
+
+      res.status(201).send(response);
 
       res.end();
 

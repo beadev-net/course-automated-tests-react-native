@@ -32,7 +32,7 @@ content-type: application/json
 ### FakeNews
 
 GET http://localhost:8080/api/fakenews
-    ?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkFkbWluIiwiaWF0IjoxNjk2Mzc3NDM0LCJleHAiOjE2OTYzODEwMzR9.-c5ZcgAYSUdWqvfHUOkClRMyOae4vO2YSFE3gBoZyW0
+    ?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MjVlY2RiY2E2NTU5OTE2YTQxOTg5YyIsImVtYWlsIjoiQWRtaW4iLCJpYXQiOjE2OTY5OTMxOTYsImV4cCI6MTY5Njk5Njc5Nn0.Xdw6o4V1gWjmcFsOZ8LZ6gV00ktG3Gk7puv5oTF5BJo
 content-type: application/json
 
 #########
@@ -48,3 +48,9 @@ content-type: application/json
     "email": "Admin",
     "birthday": "2020-01-01"
 }
+
+###
+
+GET http://localhost:8080/api/users
+    ?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MWYzYWI2OTYzMzU0NmMyZTg3MzE2ZiIsImVtYWlsIjoiQWRtaW4iLCJpYXQiOjE2OTY1NDY2OTIsImV4cCI6MTY5NjU1MDI5Mn0.ECepdSLBfofAenCb0RARLEJniais6wCvCve97_U8nMQ
+content-type: application/json

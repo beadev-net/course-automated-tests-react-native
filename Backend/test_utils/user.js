@@ -26,4 +26,13 @@ const deleteUserFake = async (user = null) => {
   return record;
 };
 
-module.exports = { insertUserFake, deleteUserFake };
+const registerUser = async (request, user = null) => {
+  const record = await request
+    .post("/api/register")
+    .send(user)
+    .set("Accept", "application/json");
+
+  return record;
+};
+
+module.exports = { insertUserFake, deleteUserFake, registerUser };

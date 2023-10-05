@@ -1,4 +1,5 @@
 const database = require("../configs/database");
+const { ObjectId } = require("mongodb");
 const collection = "users";
 
 class UsersRepository {
@@ -7,7 +8,29 @@ class UsersRepository {
       return client
         .db(database.database_name)
         .collection(collection)
-        .findOne({ email: email });
+        .findOne(
+          { email: email },
+          {
+            readConcern: {
+              level: "local",
+              readPreference: "primary",
+            },
+            readPreference: "primary",
+            writeConcern: {
+              w: "majority",
+              wtimeout: 0,
+            },
+          },
+        );
+    });
+  }
+
+  async getUserById(id) {
+    return database.run(async (client) => {
+      return client
+        .db(database.database_name)
+        .collection(collection)
+        .findOne({ _id: new ObjectId(id) });
     });
   }
 
@@ -29,10 +52,21 @@ class UsersRepository {
 
   async save(user) {
     return database.run(async (client) => {
+      /**
+       * @type {import('mongodb').Collection}
+       * @type {import('mongodb').InsertOneResult}
+       * @type {import('mongodb').InsertOneOptions}
+       */
       return client
         .db(database.database_name)
         .collection(collection)
-        .insertOne(user);
+        .insertOne(user, {
+          writeConcern: {
+            w: 1,
+            wtimeout: 10000,
+            j: true,
+          },
+        });
     });
   }
 }

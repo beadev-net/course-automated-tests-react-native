@@ -34,5 +34,6 @@ router.get("/api/fakenews", verifyTokenMiddleware, fakeNewsController.all);
 
 // UsersController
 router.put("/api/users", verifyTokenMiddleware, usersController.update);
+router.get("/api/users", verifyTokenMiddleware, usersController.show);
 
 module.exports = router;

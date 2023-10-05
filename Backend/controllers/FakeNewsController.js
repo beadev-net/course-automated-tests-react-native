@@ -4,8 +4,6 @@ class FakeNewsController {
   constructor() {}
 
   async all(req, res) {
-    const { email, password } = req.body;
-
     const fakeNewsListAllUseCase = new FakeNewsListAllUseCase();
 
     const listAll = await fakeNewsListAllUseCase.execute();
